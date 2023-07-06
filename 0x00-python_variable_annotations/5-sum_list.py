@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""sums a list"""
 from typing import List
 
 
