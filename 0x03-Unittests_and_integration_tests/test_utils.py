@@ -74,6 +74,11 @@ class TestMemoize(TestCase):
         _type_: _description_
     """
     def test_memoize(self):
+        """_summary_
+
+        Returns:
+            _type_: _description_
+        """
         class TestClass:
             """_summary_
             """
