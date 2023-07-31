@@ -3,7 +3,7 @@
 
 from parameterized import parameterized
 from unittest import TestCase
-from utils import access_nested_map, get_json
+from utils import access_nested_map, get_json, memoize
 from unittest.mock import patch
 
 
@@ -64,3 +64,37 @@ class TestGetJson(TestCase):
         mock.assert_called_once()
         patcher.stop()
 
+class TestMemoize(TestCase):
+    """_summary_
+
+    Args:
+        TestCase (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
+    class TestClass:
+        """_summary_
+        """
+        def a_method(self):
+            """_summary_
+
+            Returns:
+                _type_: _description_
+            """
+            return 42
+
+        @memoize
+        def a_property(self):
+            """_summary_
+
+            Returns:
+                _type_: _description_
+            """
+            return self.a_method()
+
+    with patch.object(TestClass, 'a_method') as mck:
+        test_cls = TestClass()
+        test_cls.a_property()
+        test_cls.a_property()
+        mck.assert_called_once()
