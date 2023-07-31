@@ -73,28 +73,29 @@ class TestMemoize(TestCase):
     Returns:
         _type_: _description_
     """
-    class TestClass:
-        """_summary_
-        """
-        def a_method(self):
+    def memoize_test(self):
+        class TestClass:
             """_summary_
-
-            Returns:
-                _type_: _description_
             """
-            return 42
+            def a_method(self):
+                """_summary_
 
-        @memoize
-        def a_property(self):
-            """_summary_
+                Returns:
+                    _type_: _description_
+                """
+                return 42
 
-            Returns:
-                _type_: _description_
-            """
-            return self.a_method()
+            @memoize
+            def a_property(self):
+                """_summary_
 
-    with patch.object(TestClass, 'a_method') as mck:
-        test_cls = TestClass()
-        test_cls.a_property()
-        test_cls.a_property()
-        mck.assert_called_once()
+                Returns:
+                    _type_: _description_
+                """
+                return self.a_method()
+
+        with patch.object(TestClass, 'a_method') as mck:
+            test_cls = TestClass()
+            test_cls.a_property()
+            test_cls.a_property()
+            mck.assert_called_once()
